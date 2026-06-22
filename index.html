@@ -275,9 +275,33 @@
       }
     ];
 
+    const STORAGE_KEY = 'comic-creator-data';
+
+    function saveToStorage() {
+      const checkboxes = Array.from(document.querySelectorAll('.quest-item')).map(cb => cb.checked);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ discoveries, checkboxes }));
+    }
+
+    function loadFromStorage() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (Array.isArray(data.discoveries)) discoveries = data.discoveries;
+        if (Array.isArray(data.checkboxes)) {
+          const items = document.querySelectorAll('.quest-item');
+          data.checkboxes.forEach((checked, i) => {
+            if (items[i]) items[i].checked = checked;
+          });
+          updateProgress();
+        }
+      } catch (e) { console.warn('Failed to load saved data:', e); }
+    }
+
     // Page Load Setup
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      loadFromStorage();
       renderNotes();
     });
 
@@ -307,6 +331,7 @@
         discoveries.push({ question: qVal, answer: aVal, reference: refVal });
       }
 
+      saveToStorage();
       clearForm();
       renderNotes();
     }
@@ -333,6 +358,7 @@
     // Remove Note
     function removeNote(index) {
       discoveries.splice(index, 1);
+      saveToStorage();
       clearForm();
       renderNotes();
     }
@@ -441,6 +467,7 @@
         btn.classList.replace('bg-rose-600', 'bg-slate-400');
         btn.classList.replace('cursor-pointer', 'cursor-not-allowed');
       }
+      saveToStorage();
     }
 
     // Toggle Modal window
