@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comic Creator Mission Card</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      font-family: 'Comic Neue', sans-serif;
+      background-color: #0f172a;
+      background-image: radial-gradient(#334155 1px, transparent 1px);
+      background-size: 30px 30px;
+      color: #1e293b;
+    }
+    
+    .comic-font { font-family: 'Bangers', cursive; letter-spacing: 0.05em; }
+    .marker-font { font-family: 'Permanent Marker', cursive; }
+    .tech-font { font-family: 'Space Grotesk', sans-serif; }
+
+    .comic-border { border: 4px solid #000000; }
+    .comic-shadow { box-shadow: 8px 8px 0px 0px #000000; }
+    .comic-shadow-sm { box-shadow: 4px 4px 0px 0px #000000; }
+
+    .grid-paper {
+      background-color: #f8fafc;
+      background-image: linear-gradient(#e2e8f0 1.5px, transparent 1.5px), linear-gradient(90deg, #e2e8f0 1.5px, transparent 1.5px);
+      background-size: 25px 25px;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      20% { left: 100%; }
+      100% { left: 100%; }
+    }
+    .glimmer {
+      position: relative; overflow: hidden;
+    }
+    .glimmer::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-25deg); animation: shine 4s infinite;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center py-10 px-4">
+
+  <!-- Main Mission Card -->
+  <main class="w-full max-w-5xl bg-yellow-400 comic-border comic-shadow rounded-3xl overflow-hidden flex flex-col md:flex-row relative">
+    
+    <!-- LEFT COLUMN: Identity & Badge -->
+    <section class="w-full md:w-5/12 bg-indigo-700 p-8 text-white flex flex-col items-center justify-between border-b-4 md:border-b-0 md:border-r-4 border-black relative">
+      <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, #fff 2px, transparent 2px); background-size: 15px 15px;"></div>
+      
+      <div class="z-10 text-center">
+        <div class="bg-red-600 text-white comic-font text-2xl px-6 py-1 comic-border comic-shadow-sm -rotate-3 inline-block mb-6">HERO LEVEL!</div>
+        <h2 class="comic-font text-5xl text-amber-300 drop-shadow-md mb-2">QUEST: COMIC CREATOR</h2>
+        <p class="tech-font text-indigo-200 uppercase tracking-widest text-sm font-bold">MEMBER: HERO DRAW-ALOT</p>
+      </div>
+
+      <!-- Achievement Badge Visual -->
+      <div class="relative my-10 group">
+        <div class="absolute inset-0 bg-yellow-400 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse"></div>
+        <div class="w-56 h-56 bg-slate-900 rounded-full comic-border flex items-center justify-center p-4 relative overflow-hidden">
+          <div id="badge-glow" class="absolute inset-0 bg-gradient-to-tr from-yellow-500 to-red-500 opacity-20"></div>
+          <div class="z-10 flex flex-col items-center text-center">
+             <i data-lucide="pen-tool" class="w-16 h-16 text-yellow-400 mb-2"></i>
+             <span class="comic-font text-3xl text-white">COMIC CREATOR</span>
+             <span class="marker-font text-teal-400 text-sm">MY ACHIEVEMENT BADGE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full z-10">
+        <div class="flex justify-between text-xs font-bold mb-2 tech-font text-indigo-100">
+          <span>MISSION PROGRESS</span>
+          <span id="prog-val">0%</span>
+        </div>
+        <div class="w-full h-6 bg-slate-900 comic-border rounded-full p-1">
+          <div id="prog-bar" class="h-full bg-gradient-to-r from-cyan-400 to-yellow-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+        <p class="text-center text-[10px] mt-4 text-indigo-300 italic">"Drawing is thinking with a pencil."</p>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Mission Content -->
+    <section class="w-full md:w-7/12 grid-paper p-8 flex flex-col">
+      
+      <!-- Title Header -->
+      <div class="mb-8">
+        <h1 class="comic-font text-6xl text-slate-900 leading-none font-bold">MY MISSION CARD</h1>
+        <div class="flex items-center gap-2 text-red-600 mt-2">
+          <i data-lucide="zap" class="fill-current"></i>
+          <span class="tech-font font-bold uppercase tracking-tighter">Objective: Create a comic world that looks 3D</span>
+        </div>
+      </div>
+
+      <!-- Section: LEARN -->
+      <div class="mb-8 space-y-4">
+        <h3 class="comic-font text-3xl text-indigo-700 flex items-center gap-2 border-b-4 border-indigo-100 pb-1">
+          <i data-lucide="lightbulb"></i> PHASE 1: LEARN
+        </h3>
+        <div class="grid grid-cols-1 gap-3">
+          <label class="flex items-start gap-3 bg-white p-4 comic-border rounded-xl comic-shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer">
+            <input type="checkbox" class="quest-item mt-1 w-6 h-6 accent-indigo-600" onchange="updateProgress()">
+            <div>
+              <p class="font-bold text-lg text-slate-800">Understanding Perspective</p>
+              <p class="text-sm text-slate-500">What is it? How do artists trick our eyes into seeing depth?</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 bg-white p-4 comic-border rounded-xl comic-shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer">
+            <input type="checkbox" class="quest-item mt-1 w-6 h-6 accent-indigo-600" onchange="updateProgress()">
+            <div>
+              <p class="font-bold text-lg text-slate-800">Master 1, 2, & 3 Point Perspective</p>
+              <p class="text-sm text-slate-500">Learn what they are and how to identify vanishing points in scenes.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section: MAKE -->
+      <div class="mb-8 space-y-4">
+        <h3 class="comic-font text-3xl text-red-600 flex items-center gap-2 border-b-4 border-red-100 pb-1">
+          <i data-lucide="hammer"></i> PHASE 2: MAKE
+        </h3>
+        <div class="grid grid-cols-1 gap-3">
+          <label class="flex items-start gap-3 bg-white p-4 comic-border rounded-xl comic-shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer">
+            <input type="checkbox" class="quest-item mt-1 w-6 h-6 accent-red-600" onchange="updateProgress()">
+            <div>
+              <p class="font-bold text-lg text-slate-800">The Cube Challenge</p>
+              <p class="text-sm text-slate-500">Draw one cube in 1-point, one in 2-point, and one in 3-point perspective.</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 bg-white p-4 comic-border rounded-xl comic-shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer">
+            <input type="checkbox" class="quest-item mt-1 w-6 h-6 accent-red-600" onchange="updateProgress()">
+            <div>
+              <p class="font-bold text-lg text-slate-800">Create One Full Scene</p>
+              <p class="text-sm text-slate-500">Use your favorite perspective type to build a comic world (city, room, or space station!).</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section: SHOW -->
+      <div class="mb-8 space-y-4">
+        <h3 class="comic-font text-3xl text-green-600 flex items-center gap-2 border-b-4 border-green-100 pb-1">
+          <i data-lucide="megaphone"></i> PHASE 3: SHOW
+        </h3>
+        <div class="bg-white p-6 comic-border rounded-2xl comic-shadow-sm relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-green-500 text-white font-bold px-4 py-1 text-xs">PRO TIP</div>
+          <p class="font-bold text-xl mb-2 text-slate-800">3-Minute Presentation</p>
+          <div class="space-y-3">
+            <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+              <p class="text-sm font-bold text-green-800 uppercase italic">The Strategy: Intro ➔ Body ➔ Conclusion</p>
+              <p class="text-xs text-green-700 leading-relaxed mt-1">Presenting your thoughts in this order helps people understand your brilliant ideas! Start with a "Hook", share your "Main Discovery", and end with a "Summary."</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-slate-100 text-slate-600 text-[10px] px-2 py-1 rounded-full font-bold">#Mindmap</span>
+              <span class="bg-slate-100 text-slate-600 text-[10px] px-2 py-1 rounded-full font-bold">#DIYPoster</span>
+              <span class="bg-slate-100 text-slate-600 text-[10px] px-2 py-1 rounded-full font-bold">#CreativeFormat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <button id="claim-btn" disabled onclick="toggleModal(true)" class="glimmer w-full bg-slate-400 text-white comic-font text-3xl py-4 rounded-2xl comic-border comic-shadow-sm transition-all cursor-not-allowed uppercase">
+        Complete Quest
+      </button>
+
+    </section>
+  </main>
+
+  <!-- Interactive Research Station -->
+  <section class="w-full max-w-5xl mt-10">
+    <!-- Mystery Research Notebook -->
+    <div class="bg-orange-50 comic-border comic-shadow rounded-2xl p-8 relative">
+      <div class="absolute -top-4 right-6 bg-red-500 text-white comic-font px-4 py-1 comic-border rotate-3 font-bold">TOP SECRET</div>
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="book-open" class="text-orange-600 w-8 h-8"></i>
+          <h3 class="marker-font text-3xl text-slate-800">My Research Database</h3>
+        </div>
+        <span class="bg-orange-200 text-orange-800 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+          <span id="note-count">1</span> Saved Entry
+        </span>
+      </div>
+      
+      <p class="text-sm text-orange-950 mb-6 font-medium">Use online resources, books, or video platforms to explore your curiosity. Add your findings below, build a log, and use them to power up your 3-minute presentation!</p>
+
+      <!-- NOTE EDITOR BOX -->
+      <div class="bg-white p-6 rounded-2xl comic-border mb-8 shadow-inner relative">
+        <h4 id="form-heading" class="font-bold text-orange-600 text-lg mb-4 flex items-center gap-1.5">
+          <i data-lucide="plus-circle" class="w-5 h-5"></i> Add New Discovery
+        </h4>
+        
+        <input type="hidden" id="edit-index" value="-1">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700 uppercase">🔍 1. My Mystery Question</label>
+            <textarea id="note-question" rows="3" placeholder="What parts of perspective make you curious? (e.g. How do I draw dynamic action poses in 3D perspective?)" class="w-full bg-slate-50 p-3 rounded-lg text-sm border-2 border-slate-200 focus:border-orange-500 focus:bg-white outline-none resize-none transition-all"></textarea>
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700 uppercase">💡 2. The Answer I Found</label>
+            <textarea id="note-answer" rows="3" placeholder="Write down the explanation or steps you discovered..." class="w-full bg-slate-50 p-3 rounded-lg text-sm border-2 border-slate-200 focus:border-orange-500 focus:bg-white outline-none resize-none transition-all"></textarea>
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-700 uppercase">🔗 3. My Reference (Source)</label>
+            <textarea id="note-ref" rows="3" placeholder="Mention the YouTube video name, book title, or Website URL..." class="w-full bg-slate-50 p-3 rounded-lg text-sm border-2 border-slate-200 focus:border-orange-500 focus:bg-white outline-none resize-none transition-all"></textarea>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <p id="form-error" class="text-red-500 text-xs font-bold hidden">⚠️ Please fill out all fields before saving!</p>
+          <div class="flex gap-2 ml-auto">
+            <button id="cancel-btn" onclick="clearForm()" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl border-2 border-slate-300 text-sm transition-all">
+              Cancel Edit
+            </button>
+            <button id="save-btn" onclick="saveNote()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 rounded-xl border-2 border-black comic-shadow-sm text-sm transition-all flex items-center gap-1">
+              <i data-lucide="check" class="w-4 h-4"></i> Add to Notebook
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTED RECORDS (Dynamic Notes Grid) -->
+      <h4 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-1.5 border-b-2 border-orange-200 pb-2">
+        <i data-lucide="bookmark" class="text-orange-600"></i> Saved Discoveries Log
+      </h4>
+      <div id="notes-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Dynmically Appended Cards go here -->
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Victory Modal -->
+  <div id="victory-modal" class="fixed inset-0 bg-slate-900/90 z-50 flex items-center justify-center p-6 hidden">
+    <div class="bg-white max-w-lg w-full comic-border comic-shadow rounded-3xl p-10 text-center relative">
+      <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-yellow-400 rounded-full border-4 border-black flex items-center justify-center animate-bounce">
+        <i data-lucide="trophy" class="w-12 h-12 text-slate-900"></i>
+      </div>
+      <h2 class="comic-font text-6xl text-indigo-700 mt-8 mb-2">CONGRATS, CHAMP!</h2>
+      <p class="marker-font text-xl text-red-500 mb-6">Master Comic Creator Badge Unlocked!</p>
+      
+      <div class="bg-slate-100 p-6 rounded-2xl text-sm text-slate-700 mb-8 border-2 border-dashed border-slate-300">
+        <p class="font-bold text-slate-900 text-lg mb-2">🎉 You Did It! 🎉</p>
+        <p class="italic leading-relaxed">
+          "You've mastered the geometry of comic worlds, tackled the vanishing points, and conquered the 3rd dimension. Show off your incredible scene in your 3-minute presentation!"
+        </p>
+      </div>
+
+      <div class="flex">
+        <button onclick="toggleModal(false)" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold comic-font text-2xl py-4 rounded-xl comic-border comic-shadow-sm transition-all uppercase tracking-wide">
+          AWESOME! KEEP CREATING!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Notes DB Array with a premium default comic-related exploration
+    let discoveries = [
+      {
+        question: "How do comic artists draw epic towering skyscrapers that look like they are rising forever?",
+        answer: "They use 3-point perspective with a third vanishing point located high in the sky. All vertical lines gather up to that point, which makes the buildings look extremely tall, almost like heroic towers!",
+        ref: "YouTube Video - '3-Point Perspective Secrets' by ComicDrawers-HQ"
+      }
+    ];
+
+    // Page Load Setup
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderNotes();
+    });
+
+    // Save or Update a Note
+    function saveNote() {
+      const qInput = document.getElementById('note-question');
+      const aInput = document.getElementById('note-answer');
+      const refInput = document.getElementById('note-ref');
+      const editIndex = parseInt(document.getElementById('edit-index').value);
+      const errorEl = document.getElementById('form-error');
+
+      const qVal = qInput.value.trim();
+      const aVal = aInput.value.trim();
+      const refVal = refInput.value.trim();
+
+      if (!qVal || !aVal || !refVal) {
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      errorEl.classList.add('hidden');
+
+      if (editIndex >= 0) {
+        // Update Note Mode
+        discoveries[editIndex] = { question: qVal, answer: aVal, reference: refVal };
+      } else {
+        // Add Note Mode
+        discoveries.push({ question: qVal, answer: aVal, reference: refVal });
+      }
+
+      clearForm();
+      renderNotes();
+    }
+
+    // Edit Existing Note Mode
+    function editNote(index) {
+      const note = discoveries[index];
+      
+      document.getElementById('note-question').value = note.question;
+      document.getElementById('note-answer').value = note.answer;
+      document.getElementById('note-ref').value = note.reference || note.ref; // handle legacy structure if any
+      document.getElementById('edit-index').value = index;
+
+      // Update Form styling for Edit Context
+      document.getElementById('form-heading').innerHTML = `<i data-lucide="edit-3" class="w-5 h-5"></i> Edit Discovery #${index + 1}`;
+      document.getElementById('save-btn').innerHTML = `<i data-lucide="save" class="w-4 h-4"></i> Save Changes`;
+      document.getElementById('cancel-btn').classList.remove('hidden');
+      
+      // Scroll smoothly to form
+      document.getElementById('form-heading').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      lucide.createIcons();
+    }
+
+    // Remove Note
+    function removeNote(index) {
+      discoveries.splice(index, 1);
+      clearForm();
+      renderNotes();
+    }
+
+    // Clear Inputs & Reset Mode
+    function clearForm() {
+      document.getElementById('note-question').value = '';
+      document.getElementById('note-answer').value = '';
+      document.getElementById('note-ref').value = '';
+      document.getElementById('edit-index').value = '-1';
+      document.getElementById('form-error').classList.add('hidden');
+
+      document.getElementById('form-heading').innerHTML = `<i data-lucide="plus-circle" class="w-5 h-5"></i> Add New Discovery`;
+      document.getElementById('save-btn').innerHTML = `<i data-lucide="check" class="w-4 h-4"></i> Add to Notebook`;
+      document.getElementById('cancel-btn').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    // Render Notebook Cards Dynamic Markup
+    function renderNotes() {
+      const listContainer = document.getElementById('notes-list');
+      const countLabel = document.getElementById('note-count');
+      listContainer.innerHTML = '';
+      
+      countLabel.innerText = discoveries.length;
+
+      if (discoveries.length === 0) {
+        listContainer.innerHTML = `
+          <div class="col-span-full text-center py-10 bg-orange-100/50 rounded-xl border-2 border-dashed border-orange-300">
+            <i data-lucide="clipboard-list" class="w-12 h-12 mx-auto text-orange-400 mb-2"></i>
+            <p class="font-bold text-orange-800">Your log is empty, Challenger!</p>
+            <p class="text-xs text-orange-600">Add some perspective discoveries to build your final presentation.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      discoveries.forEach((note, index) => {
+        const ref = note.reference || note.ref || "No reference recorded";
+        const cardHtml = `
+          <div class="bg-white p-5 rounded-xl border-2 border-slate-900 comic-shadow-sm relative flex flex-col justify-between group">
+            <div class="absolute top-2 right-2 flex gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+              <button onclick="editNote(${index})" title="Edit note" class="p-1 bg-indigo-50 hover:bg-indigo-100 border border-indigo-400 text-indigo-700 rounded transition-colors">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="removeNote(${index})" title="Delete note" class="p-1 bg-red-50 hover:bg-red-100 border border-red-400 text-red-600 rounded transition-colors">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <div>
+              <span class="inline-block bg-yellow-300 text-slate-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-black mb-3">
+                DISCOVERY #${index + 1}
+              </span>
+              <p class="font-bold text-slate-800 text-sm mb-2">
+                "&nbsp;${escapeHTML(note.question)}&nbsp;"
+              </p>
+              <div class="bg-slate-50 border-l-4 border-orange-400 p-2.5 rounded-r text-xs text-slate-600 leading-relaxed mb-4">
+                <span class="font-bold text-slate-700">Answer:</span> ${escapeHTML(note.answer)}
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1 border-t border-slate-100 pt-3 mt-auto text-[10px] text-slate-500 truncate">
+              <i data-lucide="link" class="w-3 h-3 text-orange-500 shrink-0"></i>
+              <span class="font-bold text-slate-600 uppercase tracking-wide mr-1">Source:</span>
+              <span class="truncate italic">${escapeHTML(ref)}</span>
+            </div>
+          </div>
+        `;
+        listContainer.insertAdjacentHTML('beforeend', cardHtml);
+      });
+
+      lucide.createIcons();
+    }
+
+    // Basic string escaper to protect template rendering
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+
+    // Checklist Progress Checker
+    function updateProgress() {
+      const items = document.querySelectorAll('.quest-item');
+      const checked = Array.from(items).filter(i => i.checked).length;
+      const progress = Math.round((checked / items.length) * 100);
+      
+      document.getElementById('prog-bar').style.width = progress + '%';
+      document.getElementById('prog-val').innerText = progress + '%';
+
+      const btn = document.getElementById('claim-btn');
+      if(progress >= 100) {
+        btn.disabled = false;
+        btn.classList.replace('bg-slate-400', 'bg-rose-600');
+        btn.classList.replace('cursor-not-allowed', 'cursor-pointer');
+      } else {
+        btn.disabled = true;
+        btn.classList.replace('bg-rose-600', 'bg-slate-400');
+        btn.classList.replace('cursor-pointer', 'cursor-not-allowed');
+      }
+    }
+
+    // Toggle Modal window
+    function toggleModal(show) {
+      document.getElementById('victory-modal').classList.toggle('hidden', !show);
+    }
+  </script>
+</body>
+</html>
